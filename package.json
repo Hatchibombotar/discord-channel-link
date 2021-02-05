@@ -1,0 +1,22 @@
+{
+  "name": "discord-channel-link",
+  "version": "1.0.0",
+  "description": "A discord bot that links two channels from either the same or different discord servers together.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hatchibombotar/discord-channel-link.git"
+  },
+  "author": "Hatchibombotar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Hatchibombotar/discord-channel-link/issues"
+  },
+  "homepage": "https://github.com/Hatchibombotar/discord-channel-link#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
