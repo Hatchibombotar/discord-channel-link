@@ -20,23 +20,37 @@ client.once("ready", () => console.log("bot running"))
 
 // move messages
 client.on("message", message => {
-	console.log(message.channel.id)
-	console.log(message.webhookID)
-	if (
-		message.channel.id == channelid_server1 &&
-		message.webhookID == null
-	) {
-		server2Webhook.send(message.content, { username: message.author.username, avatarURL: message.author.avatarURL({ dynamic: true }) })
-		console.log("message in server 1 to server 2")
-		return
-	}
-	if (
-		message.channel.id == channelid_server2 &&
-		message.webhookID == null
-	) {
-
-		server1Webhook.send(message.content, { username: message.author.username, avatarURL: message.author.avatarURL({ dynamic: true }) })
-		console.log("message in server 2 to server 1")
-		return
+	if (message.member.nickname == null) membername = message.author.username
+	else membername = message.member.nickname
+	if (message.webhookID == null) {
+		if (message.channel.id == channelid_server1) {
+			if (message.attachments.array().length > 0) {
+				const url = getattach()
+				function getattach() {
+					const attachurl = message.attachments.first().url
+					return attachurl
+				}
+				console.log(url)
+				server2Webhook.send(message.content, { username: membername, files: [url], avatarURL: message.author.avatarURL({ dynamic: true }) })
+			}
+			else {
+				server2Webhook.send(message.content, { username: membername, avatarURL: message.author.avatarURL({ dynamic: true }) })
+			}
+			return
+		}
+		if (message.channel.id == channelid_server2) {
+			if (message.attachments.array().length > 0) {
+				const url = getattach()
+				function getattach() {
+					const attachurl = message.attachments.first().url
+					return attachurl
+				}
+				console.log(url)
+				server1Webhook.send(message.content, { username: membername, files: [url], avatarURL: message.author.avatarURL({ dynamic: true }) })
+			}
+			else {
+				server1Webhook.send(message.content, { username: membername, avatarURL: message.author.avatarURL({ dynamic: true }) })
+			}
+		}
 	}
 })
